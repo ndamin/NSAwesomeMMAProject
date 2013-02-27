@@ -19,6 +19,11 @@
 		255C31B616DC1F91002487F5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255C31B416DC1F91002487F5 /* MainStoryboard.storyboard */; };
 		255C31B916DC1F91002487F5 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C31B816DC1F91002487F5 /* MMViewController.m */; };
 		255C31C116DC2093002487F5 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C31C016DC2093002487F5 /* Photo.m */; };
+		F1928B5016DD4CF800D111E5 /* MMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1928B4F16DD4CF800D111E5 /* MMMapViewController.m */; };
+		F1928B5216DD4E2000D111E5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1928B5116DD4E2000D111E5 /* MapKit.framework */; };
+		F1928B5516DD65CC00D111E5 /* FlickrPhotoAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = F1928B5416DD65CC00D111E5 /* FlickrPhotoAPI.m */; };
+		F1928B5C16DEBAFB00D111E5 /* MMAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = F1928B5B16DEBAFB00D111E5 /* MMAnnotation.m */; };
+		F1928B5E16DEBF4300D111E5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1928B5D16DEBF4300D111E5 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,14 @@
 		255C31B816DC1F91002487F5 /* MMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
 		255C31BF16DC2093002487F5 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		255C31C016DC2093002487F5 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		F1928B4E16DD4CF800D111E5 /* MMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMapViewController.h; sourceTree = "<group>"; };
+		F1928B4F16DD4CF800D111E5 /* MMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMapViewController.m; sourceTree = "<group>"; };
+		F1928B5116DD4E2000D111E5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F1928B5316DD65CC00D111E5 /* FlickrPhotoAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoAPI.h; sourceTree = "<group>"; };
+		F1928B5416DD65CC00D111E5 /* FlickrPhotoAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoAPI.m; sourceTree = "<group>"; };
+		F1928B5A16DEBAFB00D111E5 /* MMAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMAnnotation.h; sourceTree = "<group>"; };
+		F1928B5B16DEBAFB00D111E5 /* MMAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMAnnotation.m; sourceTree = "<group>"; };
+		F1928B5D16DEBF4300D111E5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1928B5E16DEBF4300D111E5 /* CoreLocation.framework in Frameworks */,
+				F1928B5216DD4E2000D111E5 /* MapKit.framework in Frameworks */,
 				255C319D16DC1F91002487F5 /* UIKit.framework in Frameworks */,
 				255C319F16DC1F91002487F5 /* Foundation.framework in Frameworks */,
 				255C31A116DC1F91002487F5 /* CoreGraphics.framework in Frameworks */,
@@ -59,6 +74,8 @@
 		255C319016DC1F90002487F5 = {
 			isa = PBXGroup;
 			children = (
+				F1928B5D16DEBF4300D111E5 /* CoreLocation.framework */,
+				F1928B5116DD4E2000D111E5 /* MapKit.framework */,
 				255C31A216DC1F91002487F5 /* MobieMakersApp NSAwesome */,
 				255C319B16DC1F91002487F5 /* Frameworks */,
 				255C319A16DC1F91002487F5 /* Products */,
@@ -89,10 +106,16 @@
 				255C31AB16DC1F91002487F5 /* MMAppDelegate.h */,
 				255C31AC16DC1F91002487F5 /* MMAppDelegate.m */,
 				255C31B416DC1F91002487F5 /* MainStoryboard.storyboard */,
-				255C31B716DC1F91002487F5 /* MMViewController.h */,
-				255C31BF16DC2093002487F5 /* Photo.h */,
 				255C31C016DC2093002487F5 /* Photo.m */,
+				255C31BF16DC2093002487F5 /* Photo.h */,
+				255C31B716DC1F91002487F5 /* MMViewController.h */,
 				255C31B816DC1F91002487F5 /* MMViewController.m */,
+				F1928B5316DD65CC00D111E5 /* FlickrPhotoAPI.h */,
+				F1928B5416DD65CC00D111E5 /* FlickrPhotoAPI.m */,
+				F1928B4E16DD4CF800D111E5 /* MMMapViewController.h */,
+				F1928B4F16DD4CF800D111E5 /* MMMapViewController.m */,
+				F1928B5A16DEBAFB00D111E5 /* MMAnnotation.h */,
+				F1928B5B16DEBAFB00D111E5 /* MMAnnotation.m */,
 				255C31A316DC1F91002487F5 /* Supporting Files */,
 			);
 			path = "MobieMakersApp NSAwesome";
@@ -183,6 +206,9 @@
 				255C31AD16DC1F91002487F5 /* MMAppDelegate.m in Sources */,
 				255C31B916DC1F91002487F5 /* MMViewController.m in Sources */,
 				255C31C116DC2093002487F5 /* Photo.m in Sources */,
+				F1928B5016DD4CF800D111E5 /* MMMapViewController.m in Sources */,
+				F1928B5516DD65CC00D111E5 /* FlickrPhotoAPI.m in Sources */,
+				F1928B5C16DEBAFB00D111E5 /* MMAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +331,7 @@
 				255C31BE16DC1F91002487F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

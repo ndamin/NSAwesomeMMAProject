@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FlickrPhotoAPI.h"
 
-@interface MMViewController : UIViewController
+@interface MMViewController : UIViewController <FlickrAPIDelegate>
+
 
 @end
