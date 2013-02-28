@@ -8,13 +8,19 @@
 
 #import "MMViewController.h"
 #import "MMMapViewController.h"
+#import "MMAnnotation.h"
 
 @interface MMViewController ()
 {
     __weak IBOutlet UITableView *photoResultsTable;
     NSDictionary *flickrPicResults;
     NSArray *flickrPic;
+    MMAnnotation *myAnnotation;
+    CLLocationDegrees newLatitude;
+    CLLocationDegrees newLongitude;
 }
+
+-(IBAction)refreshButton:(id)sender;
 
 @end
 
@@ -23,14 +29,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self flickrPicMethod];
+    [self startLocationUpdates];
     
 }
 
 
 -(void)flickrPicMethod
 {
-    NSString *flickrURLString = @"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=84961b9f40aa1b75245e0802ab029191&lat=41.894032&lon=-87.634742&radius=3&extras=geo&format=json&nojsoncallback=1&api_sig=5a831bbfc80dee3a3fe8b2dbbb61b9a2";
+    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=55ead9bd9fa6e1d0223fa46242fb58f0&lat=%f&lon=%f&radius=30&extras=geo&format=json&nojsoncallback=1",newLatitude,newLongitude];
     NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
     NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
     flickrURLRequest.HTTPMethod = @"GET";
@@ -41,7 +47,7 @@
      {
          [self findFlickrPhotoInfo:myResponse Data:myData Error:theirError];
      }];
-     
+    
 
 }
 
@@ -75,11 +81,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (flickrPic == nil) {
+    if (flickrPic == nil)
+    {
         return 0;
-    } else {
-        return 20;
     }
+    else if ([flickrPic count] > 20)
+    {
+        return 20;
+    } 
+    return [flickrPic count];
+    
     
     
 }
@@ -112,6 +123,58 @@
     return myCustomCell;
 }
 
+- (void)startLocationUpdates
+{
+    if (awesomeLocationManager==nil) {
+        awesomeLocationManager = [[CLLocationManager alloc]init];
+    }
+    awesomeLocationManager.delegate = self;
+    
+    //firehose of updates
+//    [awesomeLocationManager startUpdatingLocation];
+    [awesomeLocationManager startMonitoringSignificantLocationChanges];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+		   fromLocation:(CLLocation *)oldLocation
+{
+    //    NSLog(@"lat:%f - long:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    [self updatePersonalCoordinates:newLocation.coordinate];
+}
+
+- (void)updatePersonalCoordinates:(CLLocationCoordinate2D)newCoordinate
+{
+    myAnnotation.coordinate = newCoordinate;
+    NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
+    newLatitude=newCoordinate.latitude;
+    newLongitude=newCoordinate.longitude;
+    
+    [self flickrPicMethod];
+    
+}
+
+-(IBAction)refreshButton:(id)sender
+{
+    [self viewDidLoad];
+}
+    
+//******************************Code to look at for when we move to mapView********************************
+    
+//    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=55ead9bd9fa6e1d0223fa46242fb58f0&lat=%f&lon=%f&radius=30&extras=geo&format=json&nojsoncallback=1",newLatitude,newLongitude];
+//    NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
+//    NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
+//    flickrURLRequest.HTTPMethod = @"GET";
+//    
+//    [NSURLConnection sendAsynchronousRequest:flickrURLRequest
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^ void(NSURLResponse *myResponse, NSData *myData, NSError *theirError)
+//     {
+//         [self findFlickrPhotoInfo:myResponse Data:myData Error:theirError];
+//     }];
+    
+
+
 //-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 //    if ([segue.identifier isEqualToString:@"mapSegue"]) {
 //        MMMapViewController *mvc= [segue destinationViewController];
@@ -134,7 +197,7 @@
 //    }
 //    
 //}
-
+//************************End of test Code*****************************************************************
 
 - (void)didReceiveMemoryWarning
 {

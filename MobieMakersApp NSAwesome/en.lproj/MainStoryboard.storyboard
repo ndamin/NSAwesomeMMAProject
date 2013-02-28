@@ -14,6 +14,9 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="240" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="az7-Zw-0qE">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="504" id="YX1-8v-mbF"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photoCellIdentifier" rowHeight="240" id="K7o-RA-cpz">
                                         <rect key="frame" x="0.0" y="22" width="320" height="240"/>
@@ -45,13 +48,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="az7-Zw-0qE" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="3TO-D5-QuI"/>
                             <constraint firstItem="az7-Zw-0qE" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="B6h-8i-xuV"/>
                             <constraint firstItem="az7-Zw-0qE" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="KiW-6B-qgY"/>
-                            <constraint firstItem="az7-Zw-0qE" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="qoM-2e-PJK"/>
+                            <constraint firstItem="az7-Zw-0qE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="3" id="Kvo-AL-3uf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="R0P-kC-eTR"/>
+                    <navigationItem key="navigationItem" id="R0P-kC-eTR">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="JqQ-ca-4BX">
+                            <connections>
+                                <action selector="refreshButton:" destination="2" id="T91-nI-cBD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="photoResultsTable" destination="az7-Zw-0qE" id="H8G-Ly-r6Q"/>
                     </connections>
@@ -68,13 +76,16 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Ky-aI-vtB"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Ky-aI-vtB">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="504" id="jjW-VV-iCG"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3Ky-aI-vtB" firstAttribute="leading" secondItem="T7t-vx-JcZ" secondAttribute="leading" type="default" id="18b-om-L1O"/>
-                            <constraint firstItem="3Ky-aI-vtB" firstAttribute="top" secondItem="T7t-vx-JcZ" secondAttribute="top" type="default" id="ATU-Uo-WVQ"/>
-                            <constraint firstItem="3Ky-aI-vtB" firstAttribute="bottom" secondItem="T7t-vx-JcZ" secondAttribute="bottom" type="default" id="GSq-Xq-kvi"/>
+                            <constraint firstItem="3Ky-aI-vtB" firstAttribute="top" secondItem="T7t-vx-JcZ" secondAttribute="top" constant="3" id="fUR-Nq-7FZ"/>
                             <constraint firstItem="3Ky-aI-vtB" firstAttribute="trailing" secondItem="T7t-vx-JcZ" secondAttribute="trailing" type="default" id="kLo-31-RnC"/>
                         </constraints>
                     </view>
@@ -90,6 +101,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JUT-sA-Tvf">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3EY-1a-ZsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cxl-Py-VWC" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="KSo-6q-JGp">
@@ -101,7 +113,6 @@
                         <segue destination="2" kind="relationship" relationship="rootViewController" id="dN3-Y1-gr1"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3EY-1a-ZsB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-300" y="-22"/>
         </scene>
