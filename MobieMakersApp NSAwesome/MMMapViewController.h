@@ -16,6 +16,7 @@
     //declare GPS Variables
     CLLocationManager *awesomeLocationManager;
 }
+@property (strong, nonatomic) NSMutableArray *incomingArray;
 
 - (void)locationManager:(CLLocationManager *)manager
 	didUpdateToLocation:(CLLocation *)newLocation

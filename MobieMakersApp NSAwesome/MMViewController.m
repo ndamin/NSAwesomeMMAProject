@@ -9,6 +9,7 @@
 #import "MMViewController.h"
 #import "MMMapViewController.h"
 #import "MMAnnotation.h"
+#import "Photo.h"
 
 @interface MMViewController ()
 {
@@ -20,13 +21,24 @@
     CLLocationDegrees newLongitude;
 }
 
+@property (strong,nonatomic) Photo *currentPhoto;
+@property (strong,nonatomic) NSMutableArray *myPhotos;
+@property (strong, nonatomic) NSMutableArray *flickPhotoDatas;
+
+
 
 @end
 
 @implementation MMViewController
 
+@synthesize currentPhoto;
+@synthesize myPhotos;
+@synthesize flickPhotoDatas;
 - (void)viewDidLoad
 {
+    currentPhoto=[[Photo alloc]init];
+    myPhotos=[[NSMutableArray alloc]init];
+    flickPhotoDatas = [[NSMutableArray alloc]init];
     [super viewDidLoad];
     [self startLocationUpdates];
     
@@ -73,9 +85,23 @@
             
             NSLog(@"%@", flickrPic);
             
+            //Moving specific data to Photo Object  WE LEFT OFF HERE
+            for (int i =0; i<[flickrPic count]; i++) {
+                currentPhoto.latitude=[(NSNumber*)[[flickrPic objectAtIndex:i]valueForKey:@"latitude"] floatValue];
+                currentPhoto.longitude = [(NSNumber *)[[flickrPic objectAtIndex:i]valueForKey:@"longitude"]floatValue];
+                currentPhoto.title = [[flickrPic objectAtIndex:i]valueForKey:@"title"];
+                [myPhotos addObject:currentPhoto];
+            }
+            //NSLog(@"%@", myPhotos);
+            [self savedArrayOfPhotos:myPhotos];
             [photoResultsTable reloadData];
         }
     };
+}
+
+-(void)savedArrayOfPhotos:(NSMutableArray*)flickPhotoDatas
+{
+    [self performSegueWithIdentifier:@"imageModalSegue" sender:self];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -137,7 +163,7 @@
 - (void)updatePersonalCoordinates:(CLLocationCoordinate2D)newCoordinate
 {
     myAnnotation.coordinate = newCoordinate;
-    NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
+//    NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
     newLatitude=newCoordinate.latitude;
     newLongitude=newCoordinate.longitude;
     
@@ -145,47 +171,16 @@
     
 }
 
-
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"imageModalSegue"])
+    {
+        MMMapViewController *mvc = [segue destinationViewController];
+        mvc.incomingArray = self.flickPhotoDatas;
+    }
     
-//******************************Code to look at for when we move to mapView********************************
     
-//    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=55ead9bd9fa6e1d0223fa46242fb58f0&lat=%f&lon=%f&radius=30&extras=geo&format=json&nojsoncallback=1",newLatitude,newLongitude];
-//    NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
-//    NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
-//    flickrURLRequest.HTTPMethod = @"GET";
-//    
-//    [NSURLConnection sendAsynchronousRequest:flickrURLRequest
-//                                       queue:[NSOperationQueue mainQueue]
-//                           completionHandler:^ void(NSURLResponse *myResponse, NSData *myData, NSError *theirError)
-//     {
-//         [self findFlickrPhotoInfo:myResponse Data:myData Error:theirError];
-//     }];
-    
-
-
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-//    if ([segue.identifier isEqualToString:@"mapSegue"]) {
-//        MMMapViewController *mvc= [segue destinationViewController];
-//        NSIndexPath *path = [photoResultsTable indexPathForSelectedRow];
-//        NSDictionary *flickrPhotoRecord1 =[flickrPic objectAtIndex:path.row];
-//        
-//        NSString *idString=[flickrPhotoRecord1 valueForKey:@"id"];
-//        NSString *serverString=[flickrPhotoRecord1 valueForKey:@"server"];
-//        NSString *farmString=[flickrPhotoRecord1 valueForKey:@"farm"];
-//        NSString *secretString=[flickrPhotoRecord1 valueForKey:@"secret"];
-//        NSString *latitudeString=[flickrPhotoRecord1 valueForKey:@"latitude"];
-//        NSString *longitudeString=[flickrPhotoRecord1 valueForKey:@"longitude"];
-//        
-//        NSString *photoURLString=[NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@.jpg",farmString,serverString,idString,secretString];
-//        
-//        
-//        mvc.photoString=photoURLString;
-//        
-//        
-//    }
-//    
-//}
-//************************End of test Code*****************************************************************
+}
 
 - (void)didReceiveMemoryWarning
 {
