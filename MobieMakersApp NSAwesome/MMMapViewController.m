@@ -8,17 +8,29 @@
 
 #import "MMMapViewController.h"
 #import "MMAnnotation.h"
+#import "Photo.h"
+#import "MMViewController.h"
+
 
 @interface MMMapViewController ()
 {
     
     IBOutlet MKMapView *myMapView;
     MMAnnotation *myAnnotation;
+    MMAnnotation *anotherAnnotation;
+    
 }
+@property NSMutableArray *arrayOfAnnotations;
+@property Photo *currentPhoto;
+@property NSMutableArray *myPhotos;
+
 
 @end
 
 @implementation MMMapViewController
+@synthesize incomingArray;
+
+@synthesize arrayOfAnnotations;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"Here comes the array from the main controller!!! %@", incomingArray);
     
 }
 
@@ -59,6 +72,20 @@
     
     [myMapView setRegion:myRegion];
     [myMapView addAnnotation:myAnnotation];
+    
+    CLLocationCoordinate2D separateCoordinate =
+    {
+        .latitude = 41.894040f,
+        .longitude = -87.634743f
+    };
+    
+    anotherAnnotation = [[MMAnnotation alloc]init];
+    anotherAnnotation.coordinate = separateCoordinate;
+    anotherAnnotation.title = @"AHHHH";
+    anotherAnnotation.subtitle = @"Marisa Killed My Cat";
+    [myMapView addAnnotation:anotherAnnotation];
+    
+//    NSLog(@"%f",myRegion.span);
     
     [self startLocationUpdates];
 
@@ -88,7 +115,7 @@
 - (void)updatePersonalCoordinates:(CLLocationCoordinate2D)newCoordinate
 {
     myAnnotation.coordinate = newCoordinate;
-    NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
+//    NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
     [self updateMapViewWithNewCenter:newCoordinate];
 }
 
@@ -103,5 +130,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 @end

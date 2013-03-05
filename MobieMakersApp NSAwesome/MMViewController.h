@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "FlickrPhotoAPI.h"
 #import <CoreLocation/CoreLocation.h>
+#import "Photo.h"
 
 @interface MMViewController : UIViewController <FlickrAPIDelegate>
 {
     CLLocationManager *awesomeLocationManager;
 }
+-(void)savedArrayOfPhotos:(NSMutableArray*)flickPhotoDatas;
+
 
 
 @end
