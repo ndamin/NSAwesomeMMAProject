@@ -20,7 +20,6 @@
     CLLocationDegrees newLongitude;
 }
 
--(IBAction)refreshButton:(id)sender;
 
 @end
 
@@ -33,10 +32,10 @@
     
 }
 
-
+//CONNECTS TO FLICKR API
 -(void)flickrPicMethod
 {
-    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=55ead9bd9fa6e1d0223fa46242fb58f0&lat=%f&lon=%f&radius=30&extras=geo&format=json&nojsoncallback=1",newLatitude,newLongitude];
+    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=82086ce95c1c5c816d22e7bc81888c57&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
     NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
     NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
     flickrURLRequest.HTTPMethod = @"GET";
@@ -81,16 +80,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (flickrPic == nil)
-    {
-        return 0;
-    }
-    else if ([flickrPic count] > 20)
-    {
-        return 20;
-    } 
-    return [flickrPic count];
-    
+
+        return [flickrPic count];
     
     
 }
@@ -154,10 +145,7 @@
     
 }
 
--(IBAction)refreshButton:(id)sender
-{
-    [self viewDidLoad];
-}
+
     
 //******************************Code to look at for when we move to mapView********************************
     
