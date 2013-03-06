@@ -10,6 +10,7 @@
 #import "MMMapViewController.h"
 #import "MMAnnotation.h"
 #import "Photo.h"
+#import "FlickrAPI.h"
 
 @interface MMViewController ()
 {
@@ -20,6 +21,7 @@
     CLLocationDegrees newLatitude;
     CLLocationDegrees newLongitude;
     MMMapViewController *mvc;
+    FlickrAPI *flickrAPITable;
 }
 
 @property (strong,nonatomic) Photo *currentPhoto;
@@ -39,74 +41,71 @@
 - (void)viewDidLoad
 {
     myPhotos=[[NSMutableArray alloc]init];
-    flickPhotoDatas = [[NSMutableArray alloc]init];
+    
     [super viewDidLoad];
     [self startLocationUpdates];
-    mvc.incomingArray=myPhotos;
+    
     
 }
 
 //CONNECTS TO FLICKR API
--(void)flickrPicMethod
-{
-    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
-    NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
-    NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
-    flickrURLRequest.HTTPMethod = @"GET";
-    
-    [NSURLConnection sendAsynchronousRequest:flickrURLRequest
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^ void(NSURLResponse *myResponse, NSData *myData, NSError *theirError)
-     {
-         [self findFlickrPhotoInfo:myResponse Data:myData Error:theirError];
-     }];
-    
-
-}
-
--(void)findFlickrPhotoInfo:(NSURLResponse*) myResponse
-                      Data:(NSData*) myData
-                     Error:(NSError*) theirError
-{
-    {
-        //This is where our code goes... We've got a block!
-        if (theirError) {
-            NSLog(@"%@", theirError.localizedDescription);
-            
-        } else {
-            
-            NSError *jsonError;
-            id genericObjectThatIKnowIsAnArray = [NSJSONSerialization JSONObjectWithData:myData
-                                                                                 options:NSJSONReadingAllowFragments
-                                                                                   error:&jsonError];
-            
-            flickrPicResults = (NSDictionary *) genericObjectThatIKnowIsAnArray;
-            
-            NSDictionary *flickrLayerDictionary = [flickrPicResults valueForKey:@"photos"];
-            flickrPic = [flickrLayerDictionary valueForKey:(@"photo")];
-            
-            NSLog(@"%@", flickrPic);
-            
-            
-            for (int i =0; i<[flickrPic count]; i++) {
-                currentPhoto=[[Photo alloc]init];
-                currentPhoto.latitude=[(NSNumber*)[[flickrPic objectAtIndex:i]valueForKey:@"latitude"] floatValue];
-                currentPhoto.longitude = [(NSNumber *)[[flickrPic objectAtIndex:i]valueForKey:@"longitude"]floatValue];
-                currentPhoto.title = [[flickrPic objectAtIndex:i]valueForKey:@"title"];
-                [myPhotos addObject:currentPhoto];
-                
-            }
-            [photoResultsTable reloadData];
-        }
-    };
-}
+//-(void)flickrPicMethod
+//{
+//    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
+//    NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
+//    NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
+//    flickrURLRequest.HTTPMethod = @"GET";
+//    
+//    [NSURLConnection sendAsynchronousRequest:flickrURLRequest
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^ void(NSURLResponse *myResponse, NSData *myData, NSError *theirError)
+//     {
+//         [self findFlickrPhotoInfo:myResponse Data:myData Error:theirError];
+//     }];
+//    
+//
+//}
+//
+//-(void)findFlickrPhotoInfo:(NSURLResponse*) myResponse
+//                      Data:(NSData*) myData
+//                     Error:(NSError*) theirError
+//{
+//    {
+//        //This is where our code goes... We've got a block!
+//        if (theirError) {
+//            NSLog(@"%@", theirError.localizedDescription);
+//            
+//        } else {
+//            
+//            NSError *jsonError;
+//            id genericObjectThatIKnowIsAnArray = [NSJSONSerialization JSONObjectWithData:myData
+//                                                                                 options:NSJSONReadingAllowFragments
+//                                                                                   error:&jsonError];
+//            
+//            flickrPicResults = (NSDictionary *) genericObjectThatIKnowIsAnArray;
+//            
+//            NSDictionary *flickrLayerDictionary = [flickrPicResults valueForKey:@"photos"];
+//            flickrPic = [flickrLayerDictionary valueForKey:(@"photo")];
+//            
+//            NSLog(@"%@", flickrPic);
+//            
+//            
+//            for (int i =0; i<[flickrPic count]; i++) {
+//                currentPhoto=[[Photo alloc]init];
+//                currentPhoto.latitude=[(NSNumber*)[[flickrPic objectAtIndex:i]valueForKey:@"latitude"] floatValue];
+//                currentPhoto.longitude = [(NSNumber *)[[flickrPic objectAtIndex:i]valueForKey:@"longitude"]floatValue];
+//                currentPhoto.title = [[flickrPic objectAtIndex:i]valueForKey:@"title"];
+//                [myPhotos addObject:currentPhoto];
+//                
+//            }
+//            [photoResultsTable reloadData];
+//        }
+//    };
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
         return [flickrPic count];
-    
-    
 }
 
 
@@ -133,7 +132,6 @@
     UILabel *flickrPhotoLabel = (UILabel*) actualPicLabel;
     flickrPhotoLabel.text = picLabel;
     
-
     return myCustomCell;
 }
 
@@ -145,7 +143,7 @@
     awesomeLocationManager.delegate = self;
     
     //firehose of updates
-//    [awesomeLocationManager startUpdatingLocation];
+    //[awesomeLocationManager startUpdatingLocation];
     [awesomeLocationManager startMonitoringSignificantLocationChanges];
 }
 
@@ -153,18 +151,20 @@
 	didUpdateToLocation:(CLLocation *)newLocation
 		   fromLocation:(CLLocation *)oldLocation
 {
-    //    NSLog(@"lat:%f - long:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    //NSLog(@"lat:%f - long:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     [self updatePersonalCoordinates:newLocation.coordinate];
 }
 
 - (void)updatePersonalCoordinates:(CLLocationCoordinate2D)newCoordinate
 {
+    flickrAPITable=[[FlickrAPI alloc]init];
     myAnnotation.coordinate = newCoordinate;
-//    NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
+    //NSLog(@"updatePersonalCoordinates: Lat:%f - Long:%f", newCoordinate.latitude,newCoordinate.longitude);
     newLatitude=newCoordinate.latitude;
     newLongitude=newCoordinate.longitude;
     
-    [self flickrPicMethod];
+    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
+    [flickrAPITable connectToFlickr:flickrURLString];
     
 }
 
