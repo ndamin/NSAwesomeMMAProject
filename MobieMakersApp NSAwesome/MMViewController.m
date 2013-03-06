@@ -19,6 +19,7 @@
     MMAnnotation *myAnnotation;
     CLLocationDegrees newLatitude;
     CLLocationDegrees newLongitude;
+    MMMapViewController *mvc;
 }
 
 @property (strong,nonatomic) Photo *currentPhoto;
@@ -41,6 +42,7 @@
     flickPhotoDatas = [[NSMutableArray alloc]init];
     [super viewDidLoad];
     [self startLocationUpdates];
+    mvc.incomingArray=myPhotos;
     
 }
 
@@ -92,18 +94,12 @@
                 currentPhoto.longitude = [(NSNumber *)[[flickrPic objectAtIndex:i]valueForKey:@"longitude"]floatValue];
                 currentPhoto.title = [[flickrPic objectAtIndex:i]valueForKey:@"title"];
                 [myPhotos addObject:currentPhoto];
+                
             }
-            //NSLog(@"%@", myPhotos);
-//            [self savedArrayOfPhotos:myPhotos];
             [photoResultsTable reloadData];
         }
     };
 }
-
-//-(void)savedArrayOfPhotos:(NSMutableArray*)flickPhotoDatas
-//{
-//    [self performSegueWithIdentifier:@"imageModalSegue" sender:self];
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -176,7 +172,7 @@
 {
     if ([segue.identifier isEqualToString:@"imageModalSegue"])
     {
-        MMMapViewController *mvc = [segue destinationViewController];
+        mvc = [segue destinationViewController];
         mvc.incomingArray = self.myPhotos;
     }
     

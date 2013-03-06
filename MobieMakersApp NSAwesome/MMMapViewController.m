@@ -51,19 +51,19 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-	
-    for (int i=0; i<[incomingArray count]; i++)
-    {
+	NSLog(@"%@", incomingArray);
+   
+    for (int i =0; i<[incomingArray count]; i++) {
         CLLocationCoordinate2D mmCoordinate =
         {
-            .latitude = 41.60342f,
-            .longitude = -87.634742f
+            .latitude = [[[incomingArray objectAtIndex:i]valueForKey:@"latitude"] floatValue] ,
+            .longitude = [[[incomingArray objectAtIndex:i]valueForKey:@"longitude"] floatValue]
         };
         
         MKCoordinateSpan defaultSpan =
         {
-            .latitudeDelta = 0.002f,
-            .longitudeDelta =0.002f
+            .latitudeDelta = 0.02f,
+            .longitudeDelta =0.02f
         };
         
         MKCoordinateRegion myRegion = {mmCoordinate, defaultSpan};
@@ -77,10 +77,12 @@
         [myMapView addAnnotation:myAnnotation];
         
         
-        [self startLocationUpdates];
+        
+    }
+    [self startLocationUpdates];
         
 
-    };
+    
     
 }
 
