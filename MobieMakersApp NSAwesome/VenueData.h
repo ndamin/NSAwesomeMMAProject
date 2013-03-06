@@ -9,5 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @interface VenueData : NSObject
+{
+    NSDictionary *yelpObjectDict;
+    NSArray *yelpBusinessArray;
+    NSDictionary *yelpItemsDict;
+    NSString *yelpName;
+    NSString *yelpAddress;
+    NSString *yelpPhone;
+    NSString *yelpLatitude;
+    NSString *yelpLongitude;
+    NSString *yelpReviewCount;
+    NSString *yelpIsClosed;
+    NSURL *yelpRatingURL;
+}
 
 @end
