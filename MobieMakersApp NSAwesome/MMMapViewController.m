@@ -51,44 +51,37 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-	CLLocationCoordinate2D mmCoordinate =
+	
+    for (int i=0; i<[incomingArray count]; i++)
     {
-        .latitude = 41.894032f,
-        .longitude = -87.634742f
-    };
-    
-    MKCoordinateSpan defaultSpan =
-    {
-        .latitudeDelta = 0.002f,
-        .longitudeDelta =0.002f
-    };
-    
-    MKCoordinateRegion myRegion = {mmCoordinate, defaultSpan};
-    
-    myAnnotation = [[MMAnnotation alloc]init];
-    myAnnotation.coordinate = mmCoordinate;
-    myAnnotation.title =@"MobileMakers";
-    myAnnotation.subtitle =@"NSAwesome Lives Here!";
-    
-    [myMapView setRegion:myRegion];
-    [myMapView addAnnotation:myAnnotation];
-    
-    CLLocationCoordinate2D separateCoordinate =
-    {
-        .latitude = 41.894040f,
-        .longitude = -87.634743f
-    };
-    
-    anotherAnnotation = [[MMAnnotation alloc]init];
-    anotherAnnotation.coordinate = separateCoordinate;
-    anotherAnnotation.title = @"AHHHH";
-    anotherAnnotation.subtitle = @"Marisa Killed My Cat";
-    [myMapView addAnnotation:anotherAnnotation];
-    
-//    NSLog(@"%f",myRegion.span);
-    
-    [self startLocationUpdates];
+        CLLocationCoordinate2D mmCoordinate =
+        {
+            .latitude = 41.60342f,
+            .longitude = -87.634742f
+        };
+        
+        MKCoordinateSpan defaultSpan =
+        {
+            .latitudeDelta = 0.002f,
+            .longitudeDelta =0.002f
+        };
+        
+        MKCoordinateRegion myRegion = {mmCoordinate, defaultSpan};
+        
+        myAnnotation = [[MMAnnotation alloc]init];
+        myAnnotation.coordinate = mmCoordinate;
+        myAnnotation.title =@"MobileMakers";
+        myAnnotation.subtitle =@"NSAwesome Lives Here!";
+        
+        [myMapView setRegion:myRegion];
+        [myMapView addAnnotation:myAnnotation];
+        
+        
+        [self startLocationUpdates];
+        
 
+    };
+    
 }
 
 - (void)startLocationUpdates

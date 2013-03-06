@@ -34,9 +34,9 @@
 @synthesize currentPhoto;
 @synthesize myPhotos;
 @synthesize flickPhotoDatas;
+
 - (void)viewDidLoad
 {
-    currentPhoto=[[Photo alloc]init];
     myPhotos=[[NSMutableArray alloc]init];
     flickPhotoDatas = [[NSMutableArray alloc]init];
     [super viewDidLoad];
@@ -47,7 +47,7 @@
 //CONNECTS TO FLICKR API
 -(void)flickrPicMethod
 {
-    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=82086ce95c1c5c816d22e7bc81888c57&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
+    NSString *flickrURLString = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
     NSURL *flickrURL = [NSURL URLWithString:flickrURLString];
     NSMutableURLRequest *flickrURLRequest = [NSMutableURLRequest requestWithURL:flickrURL];
     flickrURLRequest.HTTPMethod = @"GET";
@@ -85,24 +85,25 @@
             
             NSLog(@"%@", flickrPic);
             
-            //Moving specific data to Photo Object  WE LEFT OFF HERE
+            
             for (int i =0; i<[flickrPic count]; i++) {
+                currentPhoto=[[Photo alloc]init];
                 currentPhoto.latitude=[(NSNumber*)[[flickrPic objectAtIndex:i]valueForKey:@"latitude"] floatValue];
                 currentPhoto.longitude = [(NSNumber *)[[flickrPic objectAtIndex:i]valueForKey:@"longitude"]floatValue];
                 currentPhoto.title = [[flickrPic objectAtIndex:i]valueForKey:@"title"];
                 [myPhotos addObject:currentPhoto];
             }
             //NSLog(@"%@", myPhotos);
-            [self savedArrayOfPhotos:myPhotos];
+//            [self savedArrayOfPhotos:myPhotos];
             [photoResultsTable reloadData];
         }
     };
 }
 
--(void)savedArrayOfPhotos:(NSMutableArray*)flickPhotoDatas
-{
-    [self performSegueWithIdentifier:@"imageModalSegue" sender:self];
-}
+//-(void)savedArrayOfPhotos:(NSMutableArray*)flickPhotoDatas
+//{
+//    [self performSegueWithIdentifier:@"imageModalSegue" sender:self];
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -176,7 +177,7 @@
     if ([segue.identifier isEqualToString:@"imageModalSegue"])
     {
         MMMapViewController *mvc = [segue destinationViewController];
-        mvc.incomingArray = self.flickPhotoDatas;
+        mvc.incomingArray = self.myPhotos;
     }
     
     
