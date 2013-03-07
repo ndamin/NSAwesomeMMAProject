@@ -10,14 +10,12 @@
 #import "Photo.h"
 
 @implementation FlickrAPI
-{
-    NSArray * flickrAPIArray;
-    Photo *currentPhoto;
-}
 
--(void)connectToFlickr:(NSString*)urlString
+@synthesize myPhotos;
+
+-(NSMutableArray*)connectToFlickr:(NSString*)urlString
 {
-    flickrAPIArray=[[NSArray alloc]init];
+    
     NSURL *flickrURL = [NSURL URLWithString:urlString];
     NSMutableURLRequest *flickrURLRequest =[NSMutableURLRequest requestWithURL:flickrURL];
     flickrURLRequest.HTTPMethod =@"GET";
@@ -35,14 +33,19 @@
                                                                                options:NSJSONReadingAllowFragments
                                                                                  error:&jsonError];
                                 NSDictionary *flickrDictionary = (NSDictionary*)jsonObject;
-                                flickrAPIArray=[flickrDictionary valueForKey:@"photos"];
+                                NSArray * flickrAPIArray;
+                                flickrAPIArray = [[NSArray alloc]init];;
+                                flickrAPIArray=[[flickrDictionary valueForKey:@"photos"]valueForKey:@"photo"];
+                              
                                 
-                                for (int i =0; i<[flickrAPIArray count]; i++) {
+                                for (int i =0; i<[flickrAPIArray count]; i++)
+                                {
+                                    Photo *currentPhoto;
                                     currentPhoto = [[Photo alloc]init];
                                     currentPhoto.latitude=[(NSNumber*)[[flickrAPIArray objectAtIndex:i]valueForKey:@"latitude"]floatValue];
                                     currentPhoto.longitude=[(NSNumber*)[[flickrAPIArray objectAtIndex:i]valueForKey:@"longitude"]floatValue];
-                                    currentPhoto.title=[(NSNumber*)[flickrAPIArray objectAtIndex:i]valueForKey:@"title"];
-                                    NSMutableArray *myPhotos =[[NSMutableArray alloc]init];
+                                    currentPhoto.title=[[flickrAPIArray objectAtIndex:i]valueForKey:@"title"];
+                                    myPhotos =[[NSMutableArray alloc]init];
                                     [myPhotos addObject:currentPhoto];
                                 }
                                 

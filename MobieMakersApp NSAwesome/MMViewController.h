@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlickrPhotoAPI.h"
 #import <CoreLocation/CoreLocation.h>
 #import "Photo.h"
 
-@interface MMViewController : UIViewController <FlickrAPIDelegate>
+@interface MMViewController : UIViewController 
 {
     CLLocationManager *awesomeLocationManager;
 }

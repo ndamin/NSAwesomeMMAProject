@@ -40,10 +40,11 @@
 
 - (void)viewDidLoad
 {
-    myPhotos=[[NSMutableArray alloc]init];
+    
     
     [super viewDidLoad];
     [self startLocationUpdates];
+    [photoResultsTable reloadData];
     
     
 }
@@ -120,7 +121,9 @@
     NSString *secretString = [actualPhotoDictionary valueForKey:@"secret"];
     NSString *fullPhotoString = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@_n.jpg" ,farmString,serverString, idString, secretString];
     
-    NSURL *photoURL = [NSURL URLWithString:fullPhotoString];
+    NSURL *photoURL;
+    photoURL= [NSURL URLWithString:fullPhotoString];
+    
     NSData *photoData = [NSData dataWithContentsOfURL:photoURL];
     UIImage *photoImage = [UIImage imageWithData:photoData];
     UIView *photoView = [myCustomCell viewWithTag:25];

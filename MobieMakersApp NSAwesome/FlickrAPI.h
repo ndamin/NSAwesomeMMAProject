@@ -10,6 +10,9 @@
 
 @interface FlickrAPI : NSObject
 
--(void)connectToFlickr:(NSString*)urlString;
+@property (strong, nonatomic)NSMutableArray *myPhotos;
+
+
+-(NSMutableArray*)connectToFlickr:(NSString*)urlString;
 
 @end

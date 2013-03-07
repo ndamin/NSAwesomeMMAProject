@@ -10,6 +10,7 @@
 #import "MMAnnotation.h"
 #import "Photo.h"
 #import "MMViewController.h"
+#import "FlickrAPI.h"
 
 
 @interface MMMapViewController ()
@@ -18,11 +19,11 @@
     IBOutlet MKMapView *myMapView;
     MMAnnotation *myAnnotation;
     MMAnnotation *anotherAnnotation;
-    
+    FlickrAPI *myFlickerAPI;
 }
 @property NSMutableArray *arrayOfAnnotations;
-@property Photo *currentPhoto;
-@property NSMutableArray *myPhotos;
+
+
 
 
 @end
@@ -44,6 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     NSLog(@"Here comes the array from the main controller!!! %@", incomingArray);
     
 }
@@ -51,6 +53,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    NSString *flickrURLString =@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=41.894032&lon=-87.634742&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1";
+    [myFlickerAPI connectToFlickr:flickrURLString];
+    
+    
+    
 	NSLog(@"%@", incomingArray);
    
     for (int i =0; i<[incomingArray count]; i++) {
