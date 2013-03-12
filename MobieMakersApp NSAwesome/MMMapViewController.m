@@ -44,23 +44,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self startLocationUpdates];
 }
 
+//Notifies the view controller that its view was added to a view hierarchy.  Runs after viewDidLoad.  Placed this in here b/c the map was showing up incorrectly and required a reload.  The enables the map to re-load once, therefore not requiring a reload.  Animated Indicates it can be changed.
+//WE DO NOT KNOW WHAT THIS EXACTLY DOES.  
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self startLocationUpdates];
+//    [self startLocationUpdates];
     
     
-    
+    //instantiating FlickrAPI object
     myFlickerAPI = [[FlickrAPI alloc] init];
+    //setting MMMapViewController as the delegate of the FlickrAPI object.
     myFlickerAPI.delegate = self;
     
+    //Declaring and setting NSString object to a URLString to feed into our API call.
+    //NSString object takes in float values newLatitude and newLongitude.
     NSString *flickrURLString =[NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
+    
+    //Passing in flickrURLString into class method "connectToFlickr"
     [myFlickerAPI connectToFlickr:flickrURLString];
-
-	NSLog(@"%@", incomingArray);
+    
+    //User---->Switch to FlickrAPI class to follow the flow
 
 }
 
@@ -106,11 +113,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+//method from FlickrAPIDelegate that takes in a NSMutableArray and determines each picture coordinate to place on the map.
 -(void) finished:(NSMutableArray*) myArray;
 {
+    //setting myFlickrAPI.myphotos array to myArray
     myFlickerAPI.myPhotos=myArray;
+    //setting incomingArray to myArray
     incomingArray = myArray;
     
+    //For loop that goes through the incommingArray and sets coordinates for each photo to place onto the map.
     for (int i =0; i<[incomingArray count]; i++) {
         CLLocationCoordinate2D mmCoordinate =
         {
@@ -124,16 +136,21 @@
             .longitudeDelta =0.2f
         };
         
+        
+        //setting our map region with our established CLLLocationCoordinate and MKCoordinateSpan
         MKCoordinateRegion myRegion = {mmCoordinate, defaultSpan};
         
+        
+        //instantiation of myAnnotation, and setting coordinate, title, and subtitle of the object
         myAnnotation = [[MMAnnotation alloc]init];
         myAnnotation.coordinate = mmCoordinate;
         myAnnotation.title =[[incomingArray objectAtIndex:i]valueForKey:@"title"];
         myAnnotation.subtitle =@"NSAwesome Lives Here!";
         
+        //set myMapView region to myRegion, adding the annotation myAnnotation
         [myMapView setRegion:myRegion];
         [myMapView addAnnotation:myAnnotation];
-        [self performSelectorOnMainThread:@selector(reloadMap) withObject:nil waitUntilDone:FALSE];
+
     }
 }
 
