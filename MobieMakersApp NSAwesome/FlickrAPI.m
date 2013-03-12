@@ -12,8 +12,9 @@
 @implementation FlickrAPI
 
 @synthesize myPhotos;
+@synthesize delegate;
 
--(NSMutableArray*)connectToFlickr:(NSString*)urlString
+-(void)connectToFlickr:(NSString*)urlString
 {
     
     NSURL *flickrURL = [NSURL URLWithString:urlString];
@@ -36,6 +37,7 @@
                                 NSArray * flickrAPIArray;
                                 flickrAPIArray = [[NSArray alloc]init];;
                                 flickrAPIArray=[[flickrDictionary valueForKey:@"photos"]valueForKey:@"photo"];
+                                myPhotos =[[NSMutableArray alloc]init];
                               
                                 
                                 for (int i =0; i<[flickrAPIArray count]; i++)
@@ -45,13 +47,15 @@
                                     currentPhoto.latitude=[(NSNumber*)[[flickrAPIArray objectAtIndex:i]valueForKey:@"latitude"]floatValue];
                                     currentPhoto.longitude=[(NSNumber*)[[flickrAPIArray objectAtIndex:i]valueForKey:@"longitude"]floatValue];
                                     currentPhoto.title=[[flickrAPIArray objectAtIndex:i]valueForKey:@"title"];
-                                    myPhotos =[[NSMutableArray alloc]init];
                                     [myPhotos addObject:currentPhoto];
                                 }
                                 
+                                [delegate finished:myPhotos];
                                 
                             }];
 }
+
+
 
 
 @end

@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FlickrAPIDelegate.h"
+
+
 
 @interface FlickrAPI : NSObject
+{
+}
 
 @property (strong, nonatomic)NSMutableArray *myPhotos;
+@property (strong, nonatomic)id<FlickrAPIDelegate> delegate;
 
 
--(NSMutableArray*)connectToFlickr:(NSString*)urlString;
+-(void)connectToFlickr:(NSString*)urlString;
 
 @end

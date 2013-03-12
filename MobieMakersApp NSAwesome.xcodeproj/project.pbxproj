@@ -79,6 +79,7 @@
 		2591917816E5564E00371F08 /* YelpMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YelpMapViewController.m; path = ../YelpMapViewController.m; sourceTree = "<group>"; };
 		B7775BEA16E79C1B00D70126 /* VenueData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenueData.h; sourceTree = "<group>"; };
 		B7775BEB16E79C1B00D70126 /* VenueData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenueData.m; sourceTree = "<group>"; };
+		F1906CDC16E904D500B6C7E4 /* FlickrAPIDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlickrAPIDelegate.h; path = ../FlickrAPIDelegate.h; sourceTree = "<group>"; };
 		F1928B4E16DD4CF800D111E5 /* MMMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMapViewController.h; sourceTree = "<group>"; };
 		F1928B4F16DD4CF800D111E5 /* MMMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMapViewController.m; sourceTree = "<group>"; };
 		F1928B5116DD4E2000D111E5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -148,6 +149,7 @@
 				255C31BF16DC2093002487F5 /* Photo.h */,
 				F19C33C916E7B417002F2742 /* FlickrAPI.h */,
 				F19C33CA16E7B418002F2742 /* FlickrAPI.m */,
+				F1906CDC16E904D500B6C7E4 /* FlickrAPIDelegate.h */,
 				B7775BEA16E79C1B00D70126 /* VenueData.h */,
 				B7775BEB16E79C1B00D70126 /* VenueData.m */,
 				F1928B5A16DEBAFB00D111E5 /* MMAnnotation.h */,

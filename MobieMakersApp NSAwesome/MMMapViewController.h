@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "FlickrAPIDelegate.h"
 
 
-@interface MMMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate>
+@interface MMMapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate,FlickrAPIDelegate>
 {
     //declare GPS Variables
     CLLocationManager *awesomeLocationManager;

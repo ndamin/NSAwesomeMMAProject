@@ -20,11 +20,10 @@
     MMAnnotation *myAnnotation;
     MMAnnotation *anotherAnnotation;
     FlickrAPI *myFlickerAPI;
+    float newLatitude;
+    float newLongitude;
 }
 @property NSMutableArray *arrayOfAnnotations;
-
-
-
 
 @end
 
@@ -45,52 +44,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    NSLog(@"Here comes the array from the main controller!!! %@", incomingArray);
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSString *flickrURLString =@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=41.894032&lon=-87.634742&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1";
-    [myFlickerAPI connectToFlickr:flickrURLString];
-    
-    
-    
-	NSLog(@"%@", incomingArray);
-   
-    for (int i =0; i<[incomingArray count]; i++) {
-        CLLocationCoordinate2D mmCoordinate =
-        {
-            .latitude = [[[incomingArray objectAtIndex:i]valueForKey:@"latitude"] floatValue] ,
-            .longitude = [[[incomingArray objectAtIndex:i]valueForKey:@"longitude"] floatValue]
-        };
-        
-        MKCoordinateSpan defaultSpan =
-        {
-            .latitudeDelta = 0.02f,
-            .longitudeDelta =0.02f
-        };
-        
-        MKCoordinateRegion myRegion = {mmCoordinate, defaultSpan};
-        
-        myAnnotation = [[MMAnnotation alloc]init];
-        myAnnotation.coordinate = mmCoordinate;
-        myAnnotation.title =@"MobileMakers";
-        myAnnotation.subtitle =@"NSAwesome Lives Here!";
-        
-        [myMapView setRegion:myRegion];
-        [myMapView addAnnotation:myAnnotation];
-        
-        
-        
-    }
     [self startLocationUpdates];
-        
+    
+    
+    
+    myFlickerAPI = [[FlickrAPI alloc] init];
+    myFlickerAPI.delegate = self;
+    
+    NSString *flickrURLString =[NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d251dca82f1f85f0b3de7d64bdb18e03&lat=%f&lon=%f&radius=30&extras=geo&per_page=20&format=json&nojsoncallback=1",newLatitude,newLongitude];
+    [myFlickerAPI connectToFlickr:flickrURLString];
 
-    
-    
+	NSLog(@"%@", incomingArray);
+
 }
 
 - (void)startLocationUpdates
@@ -110,8 +81,10 @@
 	didUpdateToLocation:(CLLocation *)newLocation
 		   fromLocation:(CLLocation *)oldLocation
 {
-//    NSLog(@"lat:%f - long:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    NSLog(@"lat:%f - long:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     [self updatePersonalCoordinates:newLocation.coordinate];
+    newLatitude=newLocation.coordinate.latitude;
+    newLongitude=newLocation.coordinate.longitude;
 }
 
 - (void)updatePersonalCoordinates:(CLLocationCoordinate2D)newCoordinate
@@ -133,6 +106,41 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) finished:(NSMutableArray*) myArray;
+{
+    myFlickerAPI.myPhotos=myArray;
+    incomingArray = myArray;
+    
+    for (int i =0; i<[incomingArray count]; i++) {
+        CLLocationCoordinate2D mmCoordinate =
+        {
+            .latitude = [[[incomingArray objectAtIndex:i]valueForKey:@"latitude"] floatValue] ,
+            .longitude = [[[incomingArray objectAtIndex:i]valueForKey:@"longitude"] floatValue]
+        };
+        
+        MKCoordinateSpan defaultSpan =
+        {
+            .latitudeDelta = 0.2f,
+            .longitudeDelta =0.2f
+        };
+        
+        MKCoordinateRegion myRegion = {mmCoordinate, defaultSpan};
+        
+        myAnnotation = [[MMAnnotation alloc]init];
+        myAnnotation.coordinate = mmCoordinate;
+        myAnnotation.title =[[incomingArray objectAtIndex:i]valueForKey:@"title"];
+        myAnnotation.subtitle =@"NSAwesome Lives Here!";
+        
+        [myMapView setRegion:myRegion];
+        [myMapView addAnnotation:myAnnotation];
+        [self performSelectorOnMainThread:@selector(reloadMap) withObject:nil waitUntilDone:FALSE];
+    }
+}
+
+-(void) reloadMap
+{
+    [myMapView setRegion:myMapView.region animated:TRUE];
+}
 
 
 @end

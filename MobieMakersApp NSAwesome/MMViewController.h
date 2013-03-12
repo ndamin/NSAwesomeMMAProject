@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "Photo.h"
+#import "FlickrAPIDelegate.h"
 
-@interface MMViewController : UIViewController 
+@interface MMViewController : UIViewController <FlickrAPIDelegate>
 {
     CLLocationManager *awesomeLocationManager;
 }
