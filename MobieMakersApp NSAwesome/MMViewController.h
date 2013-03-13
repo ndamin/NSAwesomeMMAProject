@@ -15,6 +15,10 @@
 {
     CLLocationManager *awesomeLocationManager;
 }
+
+@property (strong, nonatomic) NSManagedObjectContext *myManagedObjectContext;
+
+
 -(void)savedArrayOfPhotos:(NSMutableArray*)flickPhotoDatas;
 
 

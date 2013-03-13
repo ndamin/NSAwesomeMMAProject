@@ -10,9 +10,29 @@
 
 @implementation MMAppDelegate
 
+@synthesize myManagedObjectContext;
+@synthesize myManagedObjectModel;
+@synthesize myPersistentStoreCoordinator;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentsDirectory = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *modelURL = [[NSBundle mainBundle]URLForResource:@"Model" withExtension:@"momd"];
+    NSURL *sqliteURL = [documentsDirectory URLByAppendingPathComponent:@"Model.sqlite"];
+    NSError *error;
+    
+    myManagedObjectModel = [[NSManagedObjectModel alloc]initWithContentsOfURL:modelURL];
+    
+    myPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:myManagedObjectModel];
+    
+    if ([myPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:sqliteURL options:nil error:&error])
+    {
+        myManagedObjectContext = [[NSManagedObjectContext alloc] init];
+        
+        myManagedObjectContext.persistentStoreCoordinator = myPersistentStoreCoordinator;
+    }
+    
     return YES;
 }
 							

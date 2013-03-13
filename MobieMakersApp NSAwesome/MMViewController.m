@@ -11,6 +11,8 @@
 #import "MMAnnotation.h"
 #import "Photo.h"
 #import "FlickrAPI.h"
+#import "HistoryOfPhotos.h"
+#import "MMAppDelegate.h"
 
 @interface MMViewController ()
 {
@@ -33,13 +35,25 @@
 
 @synthesize currentPhoto;
 @synthesize myPhotos;
+@synthesize myManagedObjectContext;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    MMAppDelegate *mmAppDelegate = [[UIApplication sharedApplication]delegate];
+    mmAppDelegate.myManagedObjectContext = myManagedObjectContext;
+    
+    
     [self startLocationUpdates];
     [photoResultsTable reloadData];
+}
+
+-(void)createHistoryOfPhotoWhichIsBasedFrom:(Photo*)photo
+{
+    HistoryOfPhotos *myPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"HistoryOfPhotos" inManagedObjectContext:myManagedObjectContext];
+    
 }
 
 -(void)flickrPicMethod

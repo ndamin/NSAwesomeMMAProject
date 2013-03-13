@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2500852D16F123740034C247 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2500852B16F123740034C247 /* Model.xcdatamodeld */; };
+		2500853116F1244A0034C247 /* HistoryOfPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 2500853016F1244A0034C247 /* HistoryOfPhotos.m */; };
+		2500853316F124CC0034C247 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2500853216F124CC0034C247 /* CoreData.framework */; };
 		255C319D16DC1F91002487F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255C319C16DC1F91002487F5 /* UIKit.framework */; };
 		255C319F16DC1F91002487F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255C319E16DC1F91002487F5 /* Foundation.framework */; };
 		255C31A116DC1F91002487F5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255C31A016DC1F91002487F5 /* CoreGraphics.framework */; };
@@ -55,6 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2500852C16F123740034C247 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		2500852F16F1244A0034C247 /* HistoryOfPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfPhotos.h; sourceTree = "<group>"; };
+		2500853016F1244A0034C247 /* HistoryOfPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfPhotos.m; sourceTree = "<group>"; };
+		2500853216F124CC0034C247 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		255C319916DC1F91002487F5 /* MobieMakersApp NSAwesome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MobieMakersApp NSAwesome.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		255C319C16DC1F91002487F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		255C319E16DC1F91002487F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2500853316F124CC0034C247 /* CoreData.framework in Frameworks */,
 				2591913E16E5111100371F08 /* libYelpKit.a in Frameworks */,
 				2591913B16E50E9D00371F08 /* QuartzCore.framework in Frameworks */,
 				F1928B5E16DEBF4300D111E5 /* CoreLocation.framework in Frameworks */,
@@ -111,6 +119,7 @@
 		255C319016DC1F90002487F5 = {
 			isa = PBXGroup;
 			children = (
+				2500853216F124CC0034C247 /* CoreData.framework */,
 				2591912E16E50DF700371F08 /* YelpKit.xcodeproj */,
 				255C31A216DC1F91002487F5 /* MobieMakersApp NSAwesome */,
 				255C319B16DC1F91002487F5 /* Frameworks */,
@@ -145,6 +154,9 @@
 				255C31AB16DC1F91002487F5 /* MMAppDelegate.h */,
 				255C31AC16DC1F91002487F5 /* MMAppDelegate.m */,
 				255C31B416DC1F91002487F5 /* MainStoryboard.storyboard */,
+				2500852B16F123740034C247 /* Model.xcdatamodeld */,
+				2500852F16F1244A0034C247 /* HistoryOfPhotos.h */,
+				2500853016F1244A0034C247 /* HistoryOfPhotos.m */,
 				255C31C016DC2093002487F5 /* Photo.m */,
 				255C31BF16DC2093002487F5 /* Photo.h */,
 				F19C33C916E7B417002F2742 /* FlickrAPI.h */,
@@ -288,6 +300,8 @@
 				2591917916E5564E00371F08 /* YelpMapViewController.m in Sources */,
 				B7775BEC16E79C1B00D70126 /* VenueData.m in Sources */,
 				F19C33CB16E7B418002F2742 /* FlickrAPI.m in Sources */,
+				2500852D16F123740034C247 /* Model.xcdatamodeld in Sources */,
+				2500853116F1244A0034C247 /* HistoryOfPhotos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +445,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2500852B16F123740034C247 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2500852C16F123740034C247 /* Model.xcdatamodel */,
+			);
+			currentVersion = 2500852C16F123740034C247 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 255C319116DC1F90002487F5 /* Project object */;
 }
