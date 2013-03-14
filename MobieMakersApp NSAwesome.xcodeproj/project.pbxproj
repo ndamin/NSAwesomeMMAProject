@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2500852D16F123740034C247 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2500852B16F123740034C247 /* Model.xcdatamodeld */; };
-		2500853116F1244A0034C247 /* HistoryOfPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 2500853016F1244A0034C247 /* HistoryOfPhotos.m */; };
 		2500853316F124CC0034C247 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2500853216F124CC0034C247 /* CoreData.framework */; };
 		255C319D16DC1F91002487F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255C319C16DC1F91002487F5 /* UIKit.framework */; };
 		255C319F16DC1F91002487F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255C319E16DC1F91002487F5 /* Foundation.framework */; };
@@ -22,6 +21,7 @@
 		255C31B616DC1F91002487F5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255C31B416DC1F91002487F5 /* MainStoryboard.storyboard */; };
 		255C31B916DC1F91002487F5 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C31B816DC1F91002487F5 /* MMViewController.m */; };
 		255C31C116DC2093002487F5 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 255C31C016DC2093002487F5 /* Photo.m */; };
+		2565024C16F19A1700498410 /* HistoryOfPhotos.m in Sources */ = {isa = PBXBuildFile; fileRef = 2565024B16F19A1700498410 /* HistoryOfPhotos.m */; };
 		2591913B16E50E9D00371F08 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2591913A16E50E9D00371F08 /* QuartzCore.framework */; };
 		2591913E16E5111100371F08 /* libYelpKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2591913516E50DF700371F08 /* libYelpKit.a */; };
 		2591917916E5564E00371F08 /* YelpMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2591917816E5564E00371F08 /* YelpMapViewController.m */; };
@@ -59,8 +59,6 @@
 
 /* Begin PBXFileReference section */
 		2500852C16F123740034C247 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		2500852F16F1244A0034C247 /* HistoryOfPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfPhotos.h; sourceTree = "<group>"; };
-		2500853016F1244A0034C247 /* HistoryOfPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfPhotos.m; sourceTree = "<group>"; };
 		2500853216F124CC0034C247 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		255C319916DC1F91002487F5 /* MobieMakersApp NSAwesome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MobieMakersApp NSAwesome.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		255C319C16DC1F91002487F5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -80,6 +78,8 @@
 		255C31B816DC1F91002487F5 /* MMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
 		255C31BF16DC2093002487F5 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		255C31C016DC2093002487F5 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		2565024A16F19A1700498410 /* HistoryOfPhotos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryOfPhotos.h; sourceTree = "<group>"; };
+		2565024B16F19A1700498410 /* HistoryOfPhotos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryOfPhotos.m; sourceTree = "<group>"; };
 		2591912E16E50DF700371F08 /* YelpKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YelpKit.xcodeproj; path = YelpKit/YelpKit.xcodeproj; sourceTree = "<group>"; };
 		2591913A16E50E9D00371F08 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2591917716E5564E00371F08 /* YelpMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YelpMapViewController.h; path = ../YelpMapViewController.h; sourceTree = "<group>"; };
@@ -155,8 +155,8 @@
 				255C31AC16DC1F91002487F5 /* MMAppDelegate.m */,
 				255C31B416DC1F91002487F5 /* MainStoryboard.storyboard */,
 				2500852B16F123740034C247 /* Model.xcdatamodeld */,
-				2500852F16F1244A0034C247 /* HistoryOfPhotos.h */,
-				2500853016F1244A0034C247 /* HistoryOfPhotos.m */,
+				2565024A16F19A1700498410 /* HistoryOfPhotos.h */,
+				2565024B16F19A1700498410 /* HistoryOfPhotos.m */,
 				255C31C016DC2093002487F5 /* Photo.m */,
 				255C31BF16DC2093002487F5 /* Photo.h */,
 				F19C33C916E7B417002F2742 /* FlickrAPI.h */,
@@ -301,7 +301,7 @@
 				B7775BEC16E79C1B00D70126 /* VenueData.m in Sources */,
 				F19C33CB16E7B418002F2742 /* FlickrAPI.m in Sources */,
 				2500852D16F123740034C247 /* Model.xcdatamodeld in Sources */,
-				2500853116F1244A0034C247 /* HistoryOfPhotos.m in Sources */,
+				2565024C16F19A1700498410 /* HistoryOfPhotos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

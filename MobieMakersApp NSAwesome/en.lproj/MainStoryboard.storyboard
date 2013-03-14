@@ -9,10 +9,10 @@
             <objects>
                 <viewController id="Ceq-0z-lKP" customClass="MMMapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5B3-j5-x8X">
-                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Ky-aI-vtB">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ky-aI-vtB">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="504" id="jjW-VV-iCG"/>
                                 </constraints>
@@ -32,7 +32,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cgn-pX-9He" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="718" y="-925"/>
+            <point key="canvasLocation" x="188" y="-677"/>
         </scene>
         <!--View Controller - Item 1-->
         <scene sceneID="H0L-4r-yCf">
@@ -101,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ng-us-RSy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186" y="-1481"/>
+            <point key="canvasLocation" x="188" y="-1424"/>
         </scene>
         <!--Yelp Map View Controller-->
         <scene sceneID="Pv8-9y-dhV">
@@ -124,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQi-EG-6yN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-864" y="-1064"/>
+            <point key="canvasLocation" x="-802" y="-1546"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="KXc-NO-yx9">
@@ -143,7 +143,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvM-pf-QVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-300" y="-1064"/>
+            <point key="canvasLocation" x="-354" y="-1043"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -152,6 +152,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gwY-bI-Lod"/>
+        <segue reference="aID-RX-VaK"/>
     </inferredMetricsTieBreakers>
 </document>

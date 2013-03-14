@@ -13,6 +13,9 @@
 @property (strong, nonatomic) NSString *farmID;
 @property (strong, nonatomic) NSString *serverID;
 @property (strong, nonatomic) NSString *secret;
+
+@property (strong, nonatomic) NSString *photoURL;
+
 @property (assign, nonatomic) float latitude;
 @property (assign, nonatomic) float longitude;
 @property (strong, nonatomic) NSString *title;

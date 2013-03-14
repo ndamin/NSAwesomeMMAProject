@@ -54,6 +54,26 @@
 {
     HistoryOfPhotos *myPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"HistoryOfPhotos" inManagedObjectContext:myManagedObjectContext];
     
+    //ASK DON TOMORROW IF WE SHOULD TYPECAST THIS FROM A FLOAT TO AN NSNUMBER
+    //OR USE SCALER PROPERTIES FOR PRIMITIVES
+    //BECAUSE LONG AND LAT ARE FLOATS, SHOULD THEY STAY FLOATS??
+    //
+    //ALSO, HOW CAN WE PERSIST CERTAIN PARTS OF AN OBJECT OR A GIVEN NUMBER OF OBJECTS
+    //WITHOUT ADDING DUPLICATE CLASS OR FLOODING OUR DATABASE WITH UNNEEDED PERSISTED OBJECTS
+    //FOR EXAMPLE, WE HAVE HISTORY OF PHOTOS WHICH SAVES THE SAME THING AS THE PHOTOS CLASS
+    //AND... IF WE WANTED TO SAVE ALL PHOTOS, AFTER 9 MONTHS WE WOULD HAVE THE MOST DATAS!
+    
+    myPhoto.title = photo.title;
+    myPhoto.longitude = (NSNumber*)photo.longitude;
+    myPhoto.latitude = photo.latitude;
+    myPhoto.photoURL = photo.photoURL;
+    
+    
+    NSError *error;
+    
+    if (![myManagedObjectContext save:&error]) {
+        NSLog(@"Crazy error yo! %@", error);
+    }
 }
 
 -(void)flickrPicMethod

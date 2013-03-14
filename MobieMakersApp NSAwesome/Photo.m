@@ -9,5 +9,5 @@
 #import "Photo.h"
 
 @implementation Photo
-
+// put method to combine meta data into URL string.
 @end

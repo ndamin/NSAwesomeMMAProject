@@ -16,6 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // what's file manager?
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *documentsDirectory = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     NSURL *modelURL = [[NSBundle mainBundle]URLForResource:@"Model" withExtension:@"momd"];
@@ -26,10 +27,12 @@
     
     myPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:myManagedObjectModel];
     
+    // if there isn't a data base....
     if ([myPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:sqliteURL options:nil error:&error])
     {
+        //create one.
         myManagedObjectContext = [[NSManagedObjectContext alloc] init];
-        
+        //set new database to myPersistentStoreCoordinator
         myManagedObjectContext.persistentStoreCoordinator = myPersistentStoreCoordinator;
     }
     

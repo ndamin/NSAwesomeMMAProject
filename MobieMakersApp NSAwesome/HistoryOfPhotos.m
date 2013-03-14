@@ -2,7 +2,7 @@
 //  HistoryOfPhotos.m
 //  MobieMakersApp NSAwesome
 //
-//  Created by Ian Blue on 3/13/13.
+//  Created by Ian Blue on 3/14/13.
 //  Copyright (c) 2013 Ian Blue. All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 
 @implementation HistoryOfPhotos
 
-@dynamic title;
-@dynamic longitude;
 @dynamic latitude;
+@dynamic longitude;
 @dynamic photoURL;
+@dynamic title;
 
 @end
